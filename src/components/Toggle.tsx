@@ -19,12 +19,10 @@ const Toggle = () => {
         </div>
       )}
       {!collapsed && (
-        <div
-          onClick={onCollapse}
-          className="w-full flex items-center justify-center pt-4 mb-4"
-        >
+        <div className="w-full flex items-center justify-center pt-4 mb-4">
+          <p className="font-semibold">Welcome</p>
           <Hint label={label} side="right" asChild>
-            <Button className="h-auto p-2" variant="ghost">
+            <Button onClick={onCollapse} className="h-auto p-2" variant="ghost">
               <ArrowLeftFromLine className="h-4 w-4" />
             </Button>
           </Hint>

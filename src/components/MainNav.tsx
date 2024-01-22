@@ -1,4 +1,4 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 import {
   HiOutlineCalendarDays,
   HiOutlineCog6Tooth,
@@ -8,41 +8,64 @@ import {
 } from "react-icons/hi2";
 import { useSidebar } from "@/store/useSidebar";
 import { cn } from "@/lib/utils";
-
-const NavBar = [
-  { to: "/dashboard", icon: HiOutlineHome, title: "Home" },
-  { to: "/bookings", icon: HiOutlineCalendarDays, title: "Bookings" },
-  { to: "/cabins", icon: HiOutlineHomeModern, title: "Cabins" },
-  { to: "/users", icon: HiOutlineUsers, title: "Users" },
-  { to: "/settings", icon: HiOutlineCog6Tooth, title: "Settings" },
-];
+import useUser from "@/hooks/auth/useUser";
 
 const MainNav = () => {
   const { collapsed } = useSidebar((state) => state);
+  const { isAuthenticated } = useUser();
+  const location = useLocation();
+
+  const NavBar = [
+    { to: "/dashboard", icon: HiOutlineHome, title: "Home" },
+    { to: "/bookings", icon: HiOutlineCalendarDays, title: "Bookings" },
+    { to: "/cabins", icon: HiOutlineHomeModern, title: "Cabins" },
+    {
+      to: "/users",
+      icon: HiOutlineUsers,
+      title: "Users",
+      isAuthenticated,
+    },
+    { to: "/settings", icon: HiOutlineCog6Tooth, title: "Settings" },
+  ];
+
   return (
     <nav>
       <ul className="flex flex-col gap-4">
-        {NavBar.map((item) => (
-          <li key={item.title}>
-            <NavLink
-              to={item.to}
-              className={cn(
-                `group px-4 py-2 flex items-center gap-4 rounded-md hover:bg-neutral-100`,
-                collapsed && "justify-center"
-              )}
-            >
-              <item.icon className="group-hover:text-purple-700" size={25} />
-              <span
+        {NavBar.map((item) => {
+          const isActive = location.pathname === item.to;
+
+          if (item.isAuthenticated === false) return null;
+
+          return (
+            <li key={item.title}>
+              <NavLink
+                to={item.to}
                 className={cn(
-                  `font-medium group-hover:text-purple-700`,
-                  collapsed && "hidden"
+                  `group px-4 py-2 flex items-center gap-4 rounded-md hover:bg-neutral-100`,
+                  collapsed && "justify-center",
+                  isActive && "bg-neutral-100"
                 )}
               >
-                {item.title}
-              </span>
-            </NavLink>
-          </li>
-        ))}
+                <item.icon
+                  className={cn(
+                    "group-hover:text-purple-700",
+                    isActive && "text-purple-700"
+                  )}
+                  size={25}
+                />
+                <span
+                  className={cn(
+                    `font-medium group-hover:text-purple-700`,
+                    collapsed && "hidden",
+                    isActive && "text-purple-700"
+                  )}
+                >
+                  {item.title}
+                </span>
+              </NavLink>
+            </li>
+          );
+        })}
       </ul>
     </nav>
   );

@@ -2,6 +2,7 @@ import MainNav from "./MainNav";
 import { cn } from "@/lib/utils";
 import { useSidebar } from "@/store/useSidebar";
 import Toggle from "./Toggle";
+import Footer from "./Footer";
 
 const Sidebar = () => {
   const { collapsed } = useSidebar();
@@ -14,6 +15,10 @@ const Sidebar = () => {
     >
       <Toggle />
       <MainNav />
+
+      <div className={cn("mt-[230px]", collapsed && "hidden")}>
+        <Footer />
+      </div>
     </aside>
   );
 };

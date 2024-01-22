@@ -4,9 +4,9 @@
 
 html,
 body,
-:root {
-  @apply h-full;
-  @apply bg-neutral-100;
+#root {
+  height: 100%;
+  @apply bg-neutral-100 overflow-auto;
 }
 
 @layer base {

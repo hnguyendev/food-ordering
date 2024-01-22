@@ -4,8 +4,8 @@ import { FieldError } from "react-hook-form";
 interface InputProps {
   id: string;
   type?: string;
-  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  value?: string;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  value: string;
   label: string;
   error?: FieldError | undefined;
 }

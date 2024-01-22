@@ -6,18 +6,21 @@ import { cn } from "@/lib/utils";
 import Container from "./Container";
 
 const AppLayout = () => {
-  const { collapsed } = useSidebar();
+  const { collapsed } = useSidebar((state) => state);
 
   return (
     <>
       <Header />
-      <div className="pt-20">
+      <div className="pt-20 flex h-full">
         <Sidebar />
         <Container>
-          <main className={cn("h-full ml-60", collapsed && "ml-20")}>
-            <div className="flex flex-col mx-auto max-w-6xl">
-              <Outlet />
-            </div>
+          <main
+            className={cn(
+              "h-full ml-60 py-2 px-2 lg:px-4",
+              collapsed && "ml-20"
+            )}
+          >
+            <Outlet />
           </main>
         </Container>
       </div>

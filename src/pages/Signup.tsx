@@ -54,6 +54,10 @@ const SignUp = () => {
             type="text"
             {...register("fullName", {
               required: "This field is required",
+              minLength: {
+                value: 3,
+                message: "Fullname should be at least 3 characters",
+              },
             })}
             placeholder=" "
           />

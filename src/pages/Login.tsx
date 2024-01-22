@@ -9,8 +9,8 @@ const Login = () => {
   const { login, isPending } = useLogin();
   const navigate = useNavigate();
 
-  const [email, setEmail] = useState("lmao567@gmail.com");
-  const [password, setPassword] = useState("lmao567");
+  const [email, setEmail] = useState("lmao5678@gmail.com");
+  const [password, setPassword] = useState("lmao5678");
 
   const handleLogin = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();

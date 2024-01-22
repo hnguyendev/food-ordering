@@ -14,7 +14,7 @@ const useLogout = () => {
     mutationFn: logOutApi,
     onSuccess: () => {
       queryClient.removeQueries();
-      navigate("/login");
+      navigate("/");
     },
     onError: (err) => console.log(err),
   });
