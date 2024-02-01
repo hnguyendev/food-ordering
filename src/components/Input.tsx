@@ -8,9 +8,18 @@ interface InputProps {
   value: string;
   label: string;
   error?: FieldError | undefined;
+  disabled?: boolean;
 }
 
-const Input: FC<InputProps> = ({ id, type, onChange, value, label, error }) => {
+const Input: FC<InputProps> = ({
+  id,
+  type,
+  onChange,
+  value,
+  label,
+  error,
+  disabled,
+}) => {
   return (
     <div className="relative">
       <input
@@ -20,6 +29,7 @@ const Input: FC<InputProps> = ({ id, type, onChange, value, label, error }) => {
         value={value}
         onChange={onChange}
         placeholder=" "
+        disabled={disabled}
       />
       <label
         htmlFor={id}

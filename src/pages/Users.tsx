@@ -1,7 +1,6 @@
-import Input from "@/components/Input";
-import { Button } from "@/components/ui/button";
+import UpdateUserData from "@/features/auth/UpdateUserData";
+import UpdateUserPassword from "@/features/auth/UpdateUserPassword";
 import useUser from "@/hooks/auth/useUser";
-import useProfile from "@/hooks/profiles/useProfile";
 import useUpdateProfile from "@/hooks/profiles/useUpdateProfile";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -10,8 +9,6 @@ const Users = () => {
   const navigate = useNavigate();
   const { isLoading, isAuthenticated, data } = useUser();
   const userId = data?.id as string;
-
-  const { data: profile } = useProfile(userId);
 
   const { mutate: updateProfile } = useUpdateProfile();
 
@@ -36,32 +33,10 @@ const Users = () => {
   if (!data) return null;
 
   return (
-    <div>
-      Users
-      <div className="flex flex-col gap-y-4">
-        <p>Phone: {profile?.phone}</p>
-        <p>Address: {profile?.address}</p>
-      </div>
-      <form
-        onSubmit={handleSubmit}
-        className="flex flex-col gap-y-6 w-full max-w-xl mx-auto"
-      >
-        <Input
-          id="phone"
-          type="text"
-          label="Phone number"
-          value={phone}
-          onChange={(e) => setPhone(e.target.value)}
-        />
-        <Input
-          id="address"
-          type="text"
-          label="Address"
-          value={address}
-          onChange={(e) => setAddress(e.target.value)}
-        />
-        <Button type="submit">Sumbit</Button>
-      </form>
+    <div className="space-y-8">
+      <h1 className="font-semibold text-lg md:text-2xl">Update your account</h1>
+      <UpdateUserData />
+      <UpdateUserPassword />
     </div>
   );
 };

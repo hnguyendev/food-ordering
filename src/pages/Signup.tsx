@@ -41,7 +41,7 @@ const SignUp = () => {
 
   return (
     <main className="h-full flex flex-col items-center justify-center mt-12">
-      <img src="/logo-light.png" alt="Logo" className="h-32" />
+      <img src="/bg.jpg" alt="Logo" className="h-32 rounded-lg mt-4" />
       <form
         onSubmit={handleSubmit(onSubmit, onError)}
         className="bg-neutral-200 w-full max-w-xl mx-auto px-10 py-10 rounded-md drop-shadow-lg flex flex-col gap-4 mt-12"

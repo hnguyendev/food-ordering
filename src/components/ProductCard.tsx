@@ -1,8 +1,8 @@
 import { Button } from "./ui/button";
 import { ShoppingCart } from "lucide-react";
-import Currency from "./Currency";
-import { cn } from "@/lib/utils";
 import { useCart } from "@/store/useCart";
+import { cn } from "@/lib/utils";
+import Currency from "./Currency";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const ProductCard = ({ data }: { data: any }) => {
@@ -16,7 +16,7 @@ const ProductCard = ({ data }: { data: any }) => {
       <div className="aspect-square rounded-lg bg-gray-100 relative overflow-hidden inline-block">
         <img
           alt={data.name}
-          src="./bg.jpg"
+          src={data.imageUrl ? data.imageUrl : "tea.jfif"}
           className={cn(
             "aspect-square object-cover rounded-md group-hover:opacity-80 group-hover:scale-110 transition-transform",
             data.soldOut && "opacity-70 grayscale"
@@ -36,7 +36,7 @@ const ProductCard = ({ data }: { data: any }) => {
       </div>
 
       <div>
-        <p className="font-bold text-lg">{data.name}</p>
+        <p className="font-bold text-sm md:text-lg truncate">{data.name}</p>
         <Currency unitPrice={data.unitPrice} />
       </div>
       {isOnCart && (

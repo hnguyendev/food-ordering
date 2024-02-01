@@ -1,13 +1,21 @@
 import { getProfile } from "@/services/apiProfile";
 import { useQuery } from "@tanstack/react-query";
+import useUser from "../auth/useUser";
 
-const useProfile = (id: string) => {
-  const { data, isLoading, error } = useQuery({
+const useProfile = () => {
+  const { data: user } = useUser();
+
+  const {
+    data: profile,
+    isLoading,
+    isFetching,
+    error,
+  } = useQuery({
     queryKey: ["profile"],
-    queryFn: () => getProfile(id),
+    queryFn: () => getProfile(user?.id as string),
   });
 
-  return { data, isLoading, error };
+  return { profile, isLoading, isFetching, error };
 };
 
 export default useProfile;

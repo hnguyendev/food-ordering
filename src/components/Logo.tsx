@@ -4,7 +4,7 @@ const Logo = () => {
       <img
         src="/logo-light.png"
         alt="Logo"
-        className={`h-16 overflow-hidden transition`}
+        className={`h-16 overflow-hidden transition hidden lg:block`}
       />
       <div className="hidden lg:block">
         <p className="text-lg font-medium">Eat good</p>

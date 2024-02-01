@@ -9,14 +9,14 @@ import { Toaster } from "sonner";
 import AppLayout from "./components/AppLayout";
 import Dashboard from "./pages/Dashboard";
 import Bookings from "./pages/Bookings";
-import Cabins from "./pages/Cabins";
 import Users from "./pages/Users";
 import Account from "./pages/Account";
-import Settings from "./pages/Settings";
 import Login from "./pages/Login";
 import PageNotFound from "./pages/PageNotFound";
 import SignUp from "./pages/Signup";
-// import ProtectedRoute from "./components/ProtectedRoute";
+import Food from "./pages/Food";
+import Drink from "./pages/Drink";
+import Results from "./pages/Results";
 
 const router = createBrowserRouter([
   {
@@ -36,8 +36,12 @@ const router = createBrowserRouter([
         element: <Bookings />,
       },
       {
-        path: "cabins",
-        element: <Cabins />,
+        path: "food",
+        element: <Food />,
+      },
+      {
+        path: "drink",
+        element: <Drink />,
       },
       {
         path: "users",
@@ -48,8 +52,8 @@ const router = createBrowserRouter([
         element: <Account />,
       },
       {
-        path: "settings",
-        element: <Settings />,
+        path: "search",
+        element: <Results />,
       },
     ],
   },

@@ -1,13 +1,14 @@
 import { FC } from "react";
-import { formatCurrency } from "@/lib/utils";
+import { cn, formatCurrency } from "@/lib/utils";
 
 interface CurrencyProps {
   unitPrice: number;
+  className?: string;
 }
 
-const Currency: FC<CurrencyProps> = ({ unitPrice }) => {
+const Currency: FC<CurrencyProps> = ({ unitPrice, className }) => {
   return (
-    <div className="font-semibold">
+    <div className={cn("font-semibold", className)}>
       {formatCurrency.format(Number(unitPrice))}
     </div>
   );

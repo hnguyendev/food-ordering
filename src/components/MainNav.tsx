@@ -1,11 +1,10 @@
 import { NavLink, useLocation } from "react-router-dom";
 import {
   HiOutlineCalendarDays,
-  HiOutlineCog6Tooth,
   HiOutlineHome,
-  HiOutlineHomeModern,
   HiOutlineUsers,
 } from "react-icons/hi2";
+import { Pizza, CupSoda } from "lucide-react";
 import { useSidebar } from "@/store/useSidebar";
 import { cn } from "@/lib/utils";
 import useUser from "@/hooks/auth/useUser";
@@ -17,15 +16,22 @@ const MainNav = () => {
 
   const NavBar = [
     { to: "/dashboard", icon: HiOutlineHome, title: "Home" },
-    { to: "/bookings", icon: HiOutlineCalendarDays, title: "Bookings" },
-    { to: "/cabins", icon: HiOutlineHomeModern, title: "Cabins" },
+    { to: "/food", icon: Pizza, title: "Food" },
+    { to: "/drink", icon: CupSoda, title: "Drink" },
+    {
+      to: "/bookings",
+      icon: HiOutlineCalendarDays,
+      title: "Orders",
+      isAuthenticated,
+    },
+    // { to: "/cabins", icon: HiOutlineHomeModern, title: "Cabins" },
     {
       to: "/users",
       icon: HiOutlineUsers,
       title: "Users",
       isAuthenticated,
     },
-    { to: "/settings", icon: HiOutlineCog6Tooth, title: "Settings" },
+    // { to: "/settings", icon: HiOutlineCog6Tooth, title: "Settings" },
   ];
 
   return (
