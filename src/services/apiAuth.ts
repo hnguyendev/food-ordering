@@ -20,10 +20,12 @@ export const login = async ({
 export const signUp = async ({
   fullName,
   email,
+  phone,
   password,
 }: {
   fullName: string;
   email: string;
+  phone: string;
   password: string;
 }) => {
   const { data, error } = await supabase.auth.signUp({
@@ -32,6 +34,7 @@ export const signUp = async ({
     options: {
       data: {
         fullName,
+        phone,
         avatar: "",
       },
     },
@@ -63,6 +66,18 @@ export const logOut = async () => {
 export const updatePassword = async (password: string) => {
   const { data, error } = await supabase.auth.updateUser({
     password,
+  });
+
+  if (error) {
+    throw new Error(error.message);
+  }
+
+  return data;
+};
+
+export const sendResetPassword = async (email: string) => {
+  const { data, error } = await supabase.auth.resetPasswordForEmail(email, {
+    redirectTo: "http://localhost:5173/reset-password",
   });
 
   if (error) {

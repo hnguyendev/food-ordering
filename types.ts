@@ -16,5 +16,4 @@ export interface Item {
   imageUrl: string;
   soldOut: boolean;
   groupId: string;
-  created_at: string;
 }

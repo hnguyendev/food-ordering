@@ -5,8 +5,15 @@ import { toast } from "sonner";
 
 const useCreateOrder = () => {
   const { data, mutate, isPending, error } = useMutation({
-    mutationFn: ({ userId, cart }: { userId: string; cart: CartItem[] }) =>
-      createOrder({ userId, cart }),
+    mutationFn: ({
+      userId,
+      address,
+      cart,
+    }: {
+      userId: string;
+      address: string;
+      cart: CartItem[];
+    }) => createOrder({ userId, address, cart }),
     onSuccess: () => {
       toast.success("Create order successfully");
     },

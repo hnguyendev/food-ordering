@@ -2,9 +2,9 @@ const Logo = () => {
   return (
     <div className="flex items-center justify-center gap-x-4">
       <img
-        src="/logo-light.png"
+        src="/bg.jpg"
         alt="Logo"
-        className={`h-16 overflow-hidden transition hidden lg:block`}
+        className={`h-16 overflow-hidden transition hidden lg:block rounded-full`}
       />
       <div className="hidden lg:block">
         <p className="text-lg font-medium">Eat good</p>

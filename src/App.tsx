@@ -8,15 +8,16 @@ import { Toaster } from "sonner";
 
 import AppLayout from "./components/AppLayout";
 import Dashboard from "./pages/Dashboard";
-import Bookings from "./pages/Bookings";
+import Orders from "./pages/Orders";
 import Users from "./pages/Users";
-import Account from "./pages/Account";
 import Login from "./pages/Login";
 import PageNotFound from "./pages/PageNotFound";
 import SignUp from "./pages/Signup";
 import Food from "./pages/Food";
 import Drink from "./pages/Drink";
 import Results from "./pages/Results";
+import ResetPassword from "./pages/ResetPassword";
+import NewPassword from "./pages/NewPassword";
 
 const router = createBrowserRouter([
   {
@@ -32,8 +33,8 @@ const router = createBrowserRouter([
         element: <Dashboard />,
       },
       {
-        path: "bookings",
-        element: <Bookings />,
+        path: "orders",
+        element: <Orders />,
       },
       {
         path: "food",
@@ -47,10 +48,7 @@ const router = createBrowserRouter([
         path: "users",
         element: <Users />,
       },
-      {
-        path: "account",
-        element: <Account />,
-      },
+
       {
         path: "search",
         element: <Results />,
@@ -64,6 +62,10 @@ const router = createBrowserRouter([
   {
     path: "/signup",
     element: <SignUp />,
+  },
+  {
+    path: "reset-password",
+    element: <ResetPassword />,
   },
   {
     path: "*",

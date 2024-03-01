@@ -1,5 +1,4 @@
 import SortBy from "./SortBy";
-import SortTest from "./SortTest";
 
 const SortOperations = () => {
   return (

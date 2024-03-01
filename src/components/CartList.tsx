@@ -11,9 +11,11 @@ const CartList = () => {
           <CartItem key={item.id} data={item} />
         ))}
       </ul>
-      <span>Total Quantity: {totalQuantity()}</span>
-      <span>
-        Total price <Currency unitPrice={totalPrice()} />
+      <span className="text-sm lg:text-base">
+        Total quantity: <span className="font-semibold">{totalQuantity()}</span>
+      </span>
+      <span className="text-sm lg:text-base">
+        Total price: <Currency unitPrice={totalPrice()} />
       </span>
     </div>
   );

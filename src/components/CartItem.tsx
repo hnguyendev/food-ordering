@@ -19,7 +19,9 @@ const CartItem: FC<CartItemProps> = ({ data }) => {
           >
             -
           </button>
-          <span className="font-semibold">{data.quantity}</span>
+          <span className="font-semibold text-xs lg:text-base">
+            {data.quantity}
+          </span>
           <button onClick={() => addToCart(data)} className="text-purple-500">
             +
           </button>

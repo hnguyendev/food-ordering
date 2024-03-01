@@ -6,7 +6,7 @@ export type Json =
   | { [key: string]: Json | undefined }
   | Json[]
 
-export interface Database {
+export type Database = {
   public: {
     Tables: {
       bookings: {
@@ -182,6 +182,7 @@ export interface Database {
       }
       orders: {
         Row: {
+          address: string | null
           created_at: string
           id: string
           isPaid: boolean | null
@@ -189,6 +190,7 @@ export interface Database {
           user_id: string | null
         }
         Insert: {
+          address?: string | null
           created_at?: string
           id?: string
           isPaid?: boolean | null
@@ -196,6 +198,7 @@ export interface Database {
           user_id?: string | null
         }
         Update: {
+          address?: string | null
           created_at?: string
           id?: string
           isPaid?: boolean | null

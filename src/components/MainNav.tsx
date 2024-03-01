@@ -1,10 +1,6 @@
 import { NavLink, useLocation } from "react-router-dom";
-import {
-  HiOutlineCalendarDays,
-  HiOutlineHome,
-  HiOutlineUsers,
-} from "react-icons/hi2";
-import { Pizza, CupSoda } from "lucide-react";
+import { HiOutlineHome, HiOutlineUsers } from "react-icons/hi2";
+import { Pizza, CupSoda, History } from "lucide-react";
 import { useSidebar } from "@/store/useSidebar";
 import { cn } from "@/lib/utils";
 import useUser from "@/hooks/auth/useUser";
@@ -19,8 +15,8 @@ const MainNav = () => {
     { to: "/food", icon: Pizza, title: "Food" },
     { to: "/drink", icon: CupSoda, title: "Drink" },
     {
-      to: "/bookings",
-      icon: HiOutlineCalendarDays,
+      to: "/orders",
+      icon: History,
       title: "Orders",
       isAuthenticated,
     },

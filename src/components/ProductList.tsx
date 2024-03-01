@@ -4,8 +4,25 @@ import SortOperations from "./SortOperations";
 import { useSearchParams } from "react-router-dom";
 import FullPageSpinner from "./FullPageSpinner";
 
-const ProductList = () => {
-  const { data, isLoading } = useProducts();
+import { FC } from "react";
+
+interface ProductListProps {
+  data:
+    | {
+        created_at: string;
+        groupId: string | null;
+        id: string;
+        imageUrl: string | null;
+        name: string | null;
+        soldOut: boolean | null;
+        unitPrice: number | null;
+      }[]
+    | undefined;
+  isLoading: boolean;
+  heading: string;
+}
+
+const ProductList: FC<ProductListProps> = ({ data, isLoading, heading }) => {
   const [searchParams] = useSearchParams("");
 
   const sortBy = searchParams.get("sortBy") || "unitPrice-asc";
@@ -19,10 +36,10 @@ const ProductList = () => {
   return (
     <div className="space-y-4">
       <div className="flex gap-x-4 items-center">
-        <h3 className="font-bold text-lg lg:text-3xl">Hot Products</h3>
+        <h3 className="font-bold text-lg lg:text-3xl">{heading}</h3>
         <SortOperations />
       </div>
-      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4">
         {sortedData?.map((item) => (
           <ProductCard data={item} key={item.id} />
         ))}

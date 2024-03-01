@@ -1,12 +1,13 @@
 import Spinner from "../components/Spinner";
-import useSignUp from "@/hooks/auth/useSignUp";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import Footer from "@/components/Footer";
+import useSignUp from "@/hooks/auth/useSignUp";
 
 interface FormValues {
   fullName: string;
   email: string;
+  phone: string;
   password: string;
   passwordConfirm: string;
 }
@@ -27,14 +28,16 @@ const SignUp = () => {
   const onSubmit = ({
     fullName,
     email,
+    phone,
     password,
   }: {
     fullName: string;
     email: string;
+    phone: string;
     password: string;
   }) => {
     if (!fullName || !email || !password) return;
-    signUp({ fullName, email, password }, { onSettled: () => reset() });
+    signUp({ fullName, email, phone, password }, { onSettled: () => reset() });
   };
 
   const onError = () => {};
@@ -98,6 +101,34 @@ const SignUp = () => {
             {errors && (
               <span className="ml-10 text-sm text-red-500">
                 {errors?.email?.message}
+              </span>
+            )}
+          </label>
+        </div>
+
+        <div className="relative">
+          <input
+            className="block w-full px-6 bg-neutral-300 pb-1 pt-6 rounded-md focus:outline-none focus:ring-0 peer"
+            id="phone"
+            type="phone"
+            {...register("phone", {
+              required: "This field is required",
+              pattern: {
+                value: /(84|0[3|5|7|8|9])+([0-9]{8})\b/g,
+                message: "Please provide a valid phone",
+              },
+            })}
+            placeholder=" "
+          />
+          <label
+            htmlFor={"phone"}
+            className="absolute top-3 left-6 z-[10] origin-[0] transition duration-150 scale-75 -translate-y-3 
+        peer-focus:scale-75 peer-focus:-translate-y-3 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0"
+          >
+            Phone Number
+            {errors && (
+              <span className="ml-10 text-sm text-red-500">
+                {errors?.phone?.message}
               </span>
             )}
           </label>

@@ -1,5 +1,13 @@
+import ProductList from "@/components/ProductList";
+import useDrink from "@/hooks/products/useDrink";
+
 const Drink = () => {
-  return <div>Drink</div>;
+  const { data, isLoading } = useDrink();
+  return (
+    <div>
+      <ProductList data={data} isLoading={isLoading} heading="Drink" />
+    </div>
+  );
 };
 
 export default Drink;

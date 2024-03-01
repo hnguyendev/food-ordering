@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React, { FC, useState } from "react";
 import {
   Sheet,
   SheetClose,
@@ -16,6 +16,7 @@ import useUser from "@/hooks/auth/useUser";
 import useCreateOrder from "@/hooks/orders/useCreateOrder";
 import { useNavigate } from "react-router-dom";
 import EmptyCart from "./EmptyCart";
+import AddressInput from "./AddressInput";
 
 interface CartInfoProps {
   children: React.ReactNode;
@@ -30,9 +31,11 @@ const CartInfo: FC<CartInfoProps> = ({ children, asChild }) => {
   const { cart, clearCart } = useCart((state) => state);
   const navigate = useNavigate();
 
+  const [address, setAddress] = useState("");
+
   const onCreateOrder = () => {
     if (!cart.length || isGuest) return;
-    mutate({ userId, cart }, { onSuccess: () => clearCart() });
+    mutate({ userId, address, cart }, { onSuccess: () => clearCart() });
   };
 
   return (
@@ -43,9 +46,13 @@ const CartInfo: FC<CartInfoProps> = ({ children, asChild }) => {
           {cart.length ? (
             <>
               <SheetHeader>
-                <SheetTitle>Cart Info</SheetTitle>
-                <SheetDescription>Confirm your order</SheetDescription>
+                <SheetTitle className="text-center">Cart Info</SheetTitle>
+                <SheetDescription className="text-center">
+                  Confirm your order
+                </SheetDescription>
               </SheetHeader>
+
+              <AddressInput address={address} setAddress={setAddress} />
 
               <CartList />
 
@@ -58,15 +65,17 @@ const CartInfo: FC<CartInfoProps> = ({ children, asChild }) => {
                     Login to create order
                   </Button>
                 ) : (
-                  <Button onClick={onCreateOrder} className="mr-auto">
+                  <Button onClick={onCreateOrder} className="mr-auto" size="sm">
                     Order
                   </Button>
                 )}
 
                 <SheetClose asChild>
-                  <Button type="submit">Save changes</Button>
+                  <Button type="submit" size="sm">
+                    Save changes
+                  </Button>
                 </SheetClose>
-                <Button onClick={clearCart} variant="destructive">
+                <Button onClick={clearCart} variant="destructive" size="sm">
                   Clear cart
                 </Button>
               </SheetFooter>

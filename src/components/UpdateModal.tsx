@@ -2,14 +2,24 @@ import { cn } from "@/lib/utils";
 import { FC, useCallback, useEffect, useState } from "react";
 import { X } from "lucide-react";
 import { Button } from "./ui/button";
+import useModal from "@/hooks/modal/useModal";
+import { Input } from "./ui/input";
+import useUpdateProfile from "@/hooks/profiles/useUpdateProfile";
+import useUser from "@/hooks/auth/useUser";
 
-interface ModalProps {
+interface UpdateModalProps {
   visible?: boolean;
   onClose: () => void;
 }
 
-const Modal: FC<ModalProps> = ({ visible, onClose }) => {
+const UpdateModal: FC<UpdateModalProps> = ({ visible, onClose }) => {
   const [isVisible, setIsVisible] = useState(!!visible);
+  const { id } = useModal();
+  const [phone, setPhone] = useState("");
+  const [address, setAddress] = useState("");
+  const { mutate, isPending } = useUpdateProfile();
+  const { data } = useUser();
+  const userId = data?.id as string;
 
   useEffect(() => {
     setIsVisible(!!visible);
@@ -21,6 +31,14 @@ const Modal: FC<ModalProps> = ({ visible, onClose }) => {
       onClose();
     }, 300);
   }, [onClose]);
+
+  const handleUpdate = () => {
+    if (!phone && !address) return;
+    mutate({ id: userId, phone, address });
+    setPhone("");
+    setAddress("");
+    handleClose();
+  };
 
   if (!visible) return null;
 
@@ -36,22 +54,24 @@ const Modal: FC<ModalProps> = ({ visible, onClose }) => {
           <div className="relative h-80 px-4 p-5">
             <div className="space-y-8">
               <p className="text-sm lg:text-lg text-center">
-                Are you sure you want to update this info ?
+                Are you sure you want to update your {id} ?
               </p>
-              <div className="flex items-center justify-center gap-4">
-                <h6 className="uppercase text-xs font-medium text-neutral-300">
-                  City name
-                </h6>
-                <h3 className="text-xl font-semibold flex items-center gap-2">
-                  {/* <span className="text-3xl">{city?.emoji}</span>{" "} */}
-                  {/* {city?.cityName} */}
-                </h3>
-              </div>
-              <div className="flex items-center justify-center gap-4">
-                <h6 className="uppercase text-xs font-medium text-neutral-300">
-                  {/* You went to {city?.cityName} on */}
-                </h6>
-                {/* <p>{formatDate(city?.date || null)}</p> */}
+              <div className="flex flex-col items-center justify-center gap-4">
+                <h6 className="uppercase font-medium">Input new {id}</h6>
+                {id === "phone" && (
+                  <Input
+                    className="w-80"
+                    value={phone}
+                    onChange={(e) => setPhone(e.target.value)}
+                  />
+                )}
+                {id === "address" && (
+                  <Input
+                    className="w-80"
+                    value={address}
+                    onChange={(e) => setAddress(e.target.value)}
+                  />
+                )}
               </div>
             </div>
             <button
@@ -65,7 +85,13 @@ const Modal: FC<ModalProps> = ({ visible, onClose }) => {
             <Button onClick={handleClose} variant="link">
               CANCLE
             </Button>
-            <Button variant="primary">Update</Button>
+            <Button
+              onClick={handleUpdate}
+              disabled={isPending}
+              variant="confirm"
+            >
+              UPDATE
+            </Button>
           </div>
         </div>
       </div>
@@ -73,4 +99,4 @@ const Modal: FC<ModalProps> = ({ visible, onClose }) => {
   );
 };
 
-export default Modal;
+export default UpdateModal;

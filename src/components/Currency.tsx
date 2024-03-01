@@ -8,9 +8,9 @@ interface CurrencyProps {
 
 const Currency: FC<CurrencyProps> = ({ unitPrice, className }) => {
   return (
-    <div className={cn("font-semibold", className)}>
+    <span className={cn("font-semibold", className)}>
       {formatCurrency.format(Number(unitPrice))}
-    </div>
+    </span>
   );
 };
 

@@ -4,8 +4,9 @@ import supabase from "./supabase";
 export const getOrders = async (id: string) => {
   const { data, error } = await supabase
     .from("orders")
-    .select("*, products (name)")
-    .eq("user_id", id);
+    .select("*, order_item(quantity, totalPrice, product: products (name))")
+    .eq("user_id", id)
+    .order("created_at", { ascending: false });
 
   if (error) {
     throw new Error("Cannot get orders");
@@ -16,18 +17,24 @@ export const getOrders = async (id: string) => {
 
 export const createOrder = async ({
   userId,
+  address,
   cart,
 }: {
   userId: string;
+  address: string;
   cart: CartItem[];
 }) => {
+  if (!address) {
+    throw new Error("Please provide address");
+  }
+
   const totalPrice = cart.reduce(
     (acc, cur) => acc + cur.unitPrice * cur.quantity,
     0
   );
   const { data, error: orderError } = await supabase
     .from("orders")
-    .upsert({ totalPrice, user_id: userId })
+    .upsert({ totalPrice, user_id: userId, address })
     .select()
     .single();
 

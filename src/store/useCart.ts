@@ -1,6 +1,7 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 import { Item } from "../../types.ts";
+import { toast } from "sonner";
 
 export interface CartItem extends Item {
   quantity: number;
@@ -20,8 +21,10 @@ const updateCart = (cart: CartItem[], item: Item) => {
   const cartItem = { ...item, quantity: 1 } as CartItem;
   const isOnCart = cart.map((cartItem) => cartItem.id).includes(item.id);
 
-  if (!isOnCart) cart.push(cartItem);
-  else {
+  if (!isOnCart) {
+    cart.push(cartItem);
+    toast.success("Item added to cart");
+  } else {
     return cart.map((cartItem) => {
       if (cartItem.id === item.id)
         return { ...cartItem, quantity: cartItem.quantity + 1 } as CartItem;

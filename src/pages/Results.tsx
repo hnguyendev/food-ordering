@@ -19,7 +19,7 @@ const Results: FC<ResultsProps> = () => {
     <div className="space-y-4">
       <div className="flex gap-x-4 items-center">
         <p className="text-sm lg:text-lg">
-          {data.length} results for "
+          {data.length} {data.length > 1 ? "results" : "result"} for "
           <span className="font-semibold">{value}</span>"
         </p>
       </div>

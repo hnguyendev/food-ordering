@@ -61,6 +61,14 @@ const Login = () => {
             Create an account
           </span>
         </p>
+        <p className="text-center text-sm">
+          <span
+            onClick={() => navigate("/reset-password")}
+            className="hover:text-purple-700 hover:underline cursor-pointer"
+          >
+            Forgot password ?
+          </span>
+        </p>
       </form>
       <Footer />
     </main>
