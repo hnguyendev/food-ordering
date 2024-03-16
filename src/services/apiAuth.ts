@@ -114,9 +114,14 @@ export const updateNewPassword = async (password: string) => {
   }
 };
 
+const URL =
+  import.meta.env.MODE === "development"
+    ? import.meta.env.VITE_DEV_URL
+    : import.meta.env.VITE_DEPLOY_URL;
+
 export const sendResetPassword = async (email: string) => {
   const { data, error } = await supabase.auth.resetPasswordForEmail(email, {
-    redirectTo: "http://localhost:5173/new-password",
+    redirectTo: `${URL}new-password`,
   });
 
   if (error) {
