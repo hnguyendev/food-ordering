@@ -12,7 +12,7 @@ interface SelectProps {
 const Select: FC<SelectProps> = ({ options, value, onChange }) => {
   return (
     <select
-      className="text-sm p-3 rounded-md w-20 lg:w-full"
+      className="text-sm font-medium p-3 rounded-md w-20 lg:w-full"
       value={value}
       onChange={onChange}
     >

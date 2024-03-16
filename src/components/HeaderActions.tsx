@@ -19,9 +19,9 @@ const HeaderActions = () => {
   return (
     <div className="ml-4 flex items-center gap-x-4">
       <CartInfo asChild>
-        <Button className="flex gap-x-2">
+        <Button className="flex gap-x-2 justify-center items-center lg:grid lg:grid-cols-2 lg:gap-x-1">
           <ShoppingBag size={20} color="white" />
-          <span className="text-sm font-medium text-white">
+          <span className="text-sm font-medium text-white hidden md:block">
             {totalQuantity()}
           </span>
         </Button>
@@ -29,7 +29,7 @@ const HeaderActions = () => {
       {!isGuest && (
         <div className="flex items-center justify-end">
           <Button variant="link" onClick={() => logOut()}>
-            <span className="mr-1">Sign out</span>
+            <span className="text-xs lg:text-base">Sign out</span>
             {isPending ? <Spinner /> : <MdOutlineLogout />}
           </Button>
         </div>

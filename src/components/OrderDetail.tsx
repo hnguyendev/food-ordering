@@ -36,9 +36,12 @@ const OrderDetail: FC<OrderDetailProps> = ({ order }) => {
         </span>
       </div>
       <div className="text-sm lg:text-base font-semibold">
-        {format(new Date(order.created_at), "MMM dd yyyy hh:mm")}
+        {format(new Date(order.created_at), "MMM dd yyyy")}
       </div>
       <div className="text-sm text-muted-foreground">
+        Order time: {format(new Date(order.created_at), "HH:mm")}
+      </div>
+      <div className="text-sm text-muted-foreground truncate">
         Order address: {order.address}
       </div>
 

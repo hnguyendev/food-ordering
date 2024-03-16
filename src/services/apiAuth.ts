@@ -63,9 +63,9 @@ export const logOut = async () => {
   if (error) throw new Error(error.message);
 };
 
-export const updatePassword = async (password: string) => {
+export const updateUserFullName = async (fullName: string) => {
   const { data, error } = await supabase.auth.updateUser({
-    password,
+    data: { fullName },
   });
 
   if (error) {
@@ -75,9 +75,48 @@ export const updatePassword = async (password: string) => {
   return data;
 };
 
+export const updatePassword = async ({
+  password,
+  oldPassword,
+}: {
+  password: string;
+  oldPassword: string;
+}) => {
+  const { data, error } = await supabase.rpc("verify_user_password", {
+    password: oldPassword,
+  });
+
+  if (error) {
+    throw new Error("Wrong current password");
+  }
+
+  if (data === true) {
+    const { data, error } = await supabase.auth.updateUser({
+      password,
+    });
+
+    if (error) {
+      throw new Error(error.message);
+    }
+    return data;
+  }
+
+  throw new Error("Wrong current password");
+};
+
+export const updateNewPassword = async (password: string) => {
+  const { error } = await supabase.auth.updateUser({
+    password,
+  });
+
+  if (error) {
+    throw new Error(error.message);
+  }
+};
+
 export const sendResetPassword = async (email: string) => {
   const { data, error } = await supabase.auth.resetPasswordForEmail(email, {
-    redirectTo: "http://localhost:5173/reset-password",
+    redirectTo: "http://localhost:5173/new-password",
   });
 
   if (error) {

@@ -1,6 +1,7 @@
 import { CartItem as CartItemInterface, useCart } from "@/store/useCart";
 import React, { FC } from "react";
 import Currency from "./Currency";
+import { cn, formatCurrency } from "@/lib/utils";
 
 interface CartItemProps {
   data: CartItemInterface;
@@ -32,10 +33,9 @@ const CartItem: FC<CartItemProps> = ({ data }) => {
           className=" h-10 md:h-16 object-cover object-center aspect-square"
         />
         <p className="font-semibold text-xs">{data.name}</p>
-        <Currency
-          unitPrice={data.unitPrice}
-          className="text-xs hidden md:block"
-        />
+        <span className={cn("font-semibold text-xs hidden md:block")}>
+          {formatCurrency.format(Number(data.unitPrice * data.quantity))}
+        </span>
       </div>
     </div>
   );

@@ -30,7 +30,10 @@ export const updateProfile = async ({
 
   const { data, error } = await supabase
     .from("profiles")
-    .update({ phone: updateData?.phone, address: updateData?.address })
+    .update({
+      phone: updateData?.phone,
+      address: updateData?.address,
+    })
     .eq("id", id);
 
   if (error) {

@@ -1,4 +1,4 @@
-import React, { FC, useState } from "react";
+import React, { FC, useEffect, useState } from "react";
 import {
   Sheet,
   SheetClose,
@@ -27,10 +27,11 @@ const CartInfo: FC<CartInfoProps> = ({ children, asChild }) => {
   const { data, isAuthenticated, isLoading } = useUser();
   const userId = data?.id as string;
   const isGuest = !isLoading && !isAuthenticated;
+
   const { mutate } = useCreateOrder();
   const { cart, clearCart } = useCart((state) => state);
-  const navigate = useNavigate();
 
+  const navigate = useNavigate();
   const [address, setAddress] = useState("");
 
   const onCreateOrder = () => {
@@ -65,7 +66,11 @@ const CartInfo: FC<CartInfoProps> = ({ children, asChild }) => {
                     Login to create order
                   </Button>
                 ) : (
-                  <Button onClick={onCreateOrder} className="mr-auto" size="sm">
+                  <Button
+                    onClick={onCreateOrder}
+                    className="md:mr-auto "
+                    size="sm"
+                  >
                     Order
                   </Button>
                 )}

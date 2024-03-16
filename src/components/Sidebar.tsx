@@ -2,6 +2,7 @@ import MainNav from "./MainNav";
 import { cn } from "@/lib/utils";
 import { useSidebar } from "@/store/useSidebar";
 import Toggle from "./Toggle";
+9;
 
 const Sidebar = () => {
   const { collapsed } = useSidebar();
