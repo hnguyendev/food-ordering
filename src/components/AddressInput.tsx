@@ -1,4 +1,4 @@
-import useGeolocation from "@/store/useGeolocation";
+// import useGeolocation from "@/store/useGeolocation";
 import Hint from "./Hint";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
@@ -12,7 +12,7 @@ interface AddressInputProps {
 }
 
 const AddressInput: FC<AddressInputProps> = ({ address, setAddress }) => {
-  const { getAddress, address: geolocationAddress } = useGeolocation();
+  // const { getAddress } = useGeolocation();
   return (
     <div className="space-y-2 my-4">
       <p className="text-sm lg:text-base">Confirm your address</p>
@@ -23,7 +23,7 @@ const AddressInput: FC<AddressInputProps> = ({ address, setAddress }) => {
           className="focus-visible:ring-0 focus-visible:ring-transparent focus-visible:ring-offset-0"
         />
         <Hint label="Get location" side="bottom" asChild>
-          <Button onClick={getAddress} type="submit" size="sm" variant="ghost">
+          <Button onClick={() => {}} type="submit" size="sm" variant="ghost">
             <LocateFixed className="h-5 w-5 text-muted-foreground" />
           </Button>
         </Hint>

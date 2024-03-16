@@ -1,6 +1,5 @@
 import { CartItem as CartItemInterface, useCart } from "@/store/useCart";
-import React, { FC } from "react";
-import Currency from "./Currency";
+import { FC } from "react";
 import { cn, formatCurrency } from "@/lib/utils";
 
 interface CartItemProps {

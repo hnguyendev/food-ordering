@@ -1,4 +1,3 @@
-import useProducts from "@/hooks/products/useProducts";
 import ProductCard from "./ProductCard";
 import SortOperations from "./SortOperations";
 import { useSearchParams } from "react-router-dom";

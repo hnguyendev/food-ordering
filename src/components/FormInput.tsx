@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import { FC } from "react";
 import { Button } from "./ui/button";
 import { Edit3 } from "lucide-react";
 import useModal from "@/hooks/modal/useModal";
