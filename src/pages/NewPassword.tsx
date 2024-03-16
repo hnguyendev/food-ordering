@@ -24,6 +24,7 @@ const NewPassword = () => {
   const [value, setValue] = useState(false);
 
   useEffect(() => {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     supabase.auth.onAuthStateChange(async (event, session) => {
       if (event === "PASSWORD_RECOVERY") {
         setValue(true);
