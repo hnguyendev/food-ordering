@@ -5,6 +5,16 @@ import FullPageSpinner from "./FullPageSpinner";
 
 import { FC } from "react";
 
+interface Item {
+  created_at: string;
+  groupId: string | null;
+  id: string;
+  imageUrl: string | null;
+  name: string | null;
+  soldOut: boolean | null;
+  unitPrice: number | null;
+}
+
 interface ProductListProps {
   data:
     | {
@@ -28,7 +38,17 @@ const ProductList: FC<ProductListProps> = ({ data, isLoading, heading }) => {
   const [value, direction] = sortBy.split("-");
 
   const modifier = direction === "asc" ? 1 : -1;
-  const sortedData = data?.sort((a, b) => (a[value] - b[value]) * modifier);
+  const sortedData = data?.sort((a: Item, b: Item) => {
+    const aValue = a[value as keyof Item];
+    const bValue = b[value as keyof Item];
+
+    // Handle cases where values might be null or undefined
+    if (typeof aValue !== "number" || typeof bValue !== "number") {
+      return 0; // or any other logic suitable for your use case
+    }
+
+    return (aValue - bValue) * modifier;
+  });
 
   if (isLoading) return <FullPageSpinner />;
 
