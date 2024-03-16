@@ -35,8 +35,6 @@ const Login = () => {
     login({ email, password }, { onSettled: () => form.resetField });
   };
 
-  console.log(import.meta.env.MODE);
-
   return (
     <main className="h-full flex flex-col items-center justify-center mt-12">
       <img src="/bg.jpg" alt="Logo" className="h-32 rounded-lg" />
