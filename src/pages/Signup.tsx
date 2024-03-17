@@ -43,8 +43,8 @@ const SignUp = () => {
   };
 
   return (
-    <main className="h-full flex flex-col items-center justify-center mt-12">
-      <img src="/bg.jpg" alt="Logo" className="h-32 rounded-lg mt-4" />
+    <main className="h-full flex flex-col items-center justify-center">
+      <img src="/bg.jpg" alt="Logo" className="h-32 rounded-lg mt-80" />
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}

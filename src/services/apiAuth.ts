@@ -114,7 +114,10 @@ export const updateNewPassword = async (password: string) => {
   }
 };
 
-const URL = import.meta.env.VITE_DEPLOY_URL;
+const URL =
+  import.meta.env.MODE === "production"
+    ? import.meta.env.VITE_DEPLOY_URL
+    : import.meta.env.VITE_DEV_URL;
 
 export const sendResetPassword = async (email: string) => {
   const { data, error } = await supabase.auth.resetPasswordForEmail(email, {

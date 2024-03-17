@@ -54,7 +54,7 @@ const Login = () => {
                     <Input
                       disabled={isPending}
                       {...field}
-                      placeholder="********"
+                      placeholder="example@gmail.com"
                       type="email"
                     />
                   </FormControl>
