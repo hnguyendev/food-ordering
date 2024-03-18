@@ -106,7 +106,7 @@ const NewPassword = () => {
       </main>
     );
 
-  return <Button onClick={() => navigate(-1)}>&larr; Back</Button>;
+  return <Button onClick={() => navigate("/")}>&larr; Back</Button>;
 };
 
 export default NewPassword;

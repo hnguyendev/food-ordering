@@ -49,3 +49,19 @@ export const ResetSchema = z.object({
     message: "This field is required",
   }),
 });
+
+export const UpdateFullnameSchema = z.object({
+  fullName: z.string().min(3, {
+    message: "Name should be at least 3 characters",
+  }),
+});
+
+export const UpdatePhoneSchema = z.object({
+  phone: z.string().regex(phoneRegex, "Please provide a valid number!"),
+});
+
+export const UpdateAddressSchema = z.object({
+  address: z.string().min(5, {
+    message: "Please provide a valid address",
+  }),
+});
